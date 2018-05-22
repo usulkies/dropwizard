@@ -40,7 +40,8 @@ public class DbMigrateDifferentFileCommandTest extends AbstractMigrationTest {
 
     @Test
     public void testRunForFileFromFilesystem() throws Exception {
-        final String migrationsPath = new File(Resources.getResource("migrations.xml").toURI())
+        final String migrationsPath = new File(Thread.currentThread().getContextClassLoader()
+            .getResource("migrations.xml").toURI())
             .getAbsolutePath();
         migrateCommand.run(null, new Namespace(ImmutableMap.of("migrations-file", migrationsPath)), conf);
         try (Handle handle = new DBI(databaseUrl, "sa", "").open()) {
