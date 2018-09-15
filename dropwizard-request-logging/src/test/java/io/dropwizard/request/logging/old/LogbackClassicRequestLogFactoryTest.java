@@ -12,8 +12,8 @@ import io.dropwizard.request.logging.RequestLogFactory;
 import io.dropwizard.util.Resources;
 import io.dropwizard.validation.BaseValidator;
 import org.eclipse.jetty.server.RequestLog;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.TimeZone;
@@ -28,7 +28,7 @@ public class LogbackClassicRequestLogFactoryTest {
 
     private RequestLogFactory<?> requestLog;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         final ObjectMapper objectMapper = Jackson.newObjectMapper();
         objectMapper.getSubtypeResolver().registerSubtypes(ConsoleAppenderFactory.class, FileAppenderFactory.class,

@@ -1,8 +1,8 @@
 package io.dropwizard.lifecycle.setup;
 
 import io.dropwizard.util.Duration;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.exceptions.verification.WantedButNotInvoked;
 import org.slf4j.Logger;
 
@@ -27,7 +27,7 @@ public class ExecutorServiceBuilderTest {
     private ExecutorServiceBuilder executorServiceBuilder;
     private Logger log;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         executorServiceBuilder = new ExecutorServiceBuilder(new LifecycleEnvironment(), "test");
         log = mock(Logger.class);

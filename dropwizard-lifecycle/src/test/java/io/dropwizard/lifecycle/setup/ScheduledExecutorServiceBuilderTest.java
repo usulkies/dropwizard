@@ -2,8 +2,8 @@ package io.dropwizard.lifecycle.setup;
 
 import io.dropwizard.lifecycle.ExecutorServiceManager;
 import io.dropwizard.util.Duration;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import javax.annotation.Nullable;
@@ -30,7 +30,7 @@ public class ScheduledExecutorServiceBuilderTest {
         this.le = mock(LifecycleEnvironment.class);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         if (this.execTracker != null) {
             this.execTracker.shutdownNow();

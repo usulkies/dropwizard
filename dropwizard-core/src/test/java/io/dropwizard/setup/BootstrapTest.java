@@ -18,8 +18,8 @@ import io.dropwizard.validation.valuehandling.OptionalIntValidatedValueUnwrapper
 import io.dropwizard.validation.valuehandling.OptionalLongValidatedValueUnwrapper;
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.internal.engine.ValidatorFactoryImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
@@ -34,7 +34,7 @@ public class BootstrapTest {
     };
     private Bootstrap<Configuration> bootstrap;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         bootstrap = new Bootstrap<>(application);
     }
@@ -106,7 +106,7 @@ public class BootstrapTest {
 
         ValidatorFactoryImpl validatorFactory = (ValidatorFactoryImpl) bootstrap.getValidatorFactory();
 
-        // It's imperative that the NonEmptyString validator come before the general param validator
+        // It's imperative that the NonEmptyString validator come brefore the general param validator
         // because a NonEmptyString is a param that wraps an optional and the Hibernate Validator
         // can't unwrap nested classes it knows how to unwrap.
         // https://hibernate.atlassian.net/browse/HV-904

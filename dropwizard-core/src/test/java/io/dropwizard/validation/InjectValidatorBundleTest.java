@@ -7,8 +7,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.hibernate.validator.internal.constraintvalidators.bv.MinValidatorForNumber;
 import org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorFactoryImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintValidatorFactory;
 import javax.validation.ConstraintViolation;
@@ -38,7 +38,7 @@ public class InjectValidatorBundleTest {
 
     private ValidatorFactory validatorFactory;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Bootstrap<Configuration> bootstrap = new Bootstrap<>(application);
         application.initialize(bootstrap);

@@ -5,8 +5,8 @@ import io.dropwizard.servlets.assets.AssetServlet;
 import io.dropwizard.servlets.assets.ResourceURL;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.util.Resources;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import javax.servlet.ServletRegistration;
@@ -27,7 +27,7 @@ public class AssetsBundleTest {
     private AssetServlet servlet = new AssetServlet("/", "/", null, null);
     private String servletPath = "";
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(environment.servlets()).thenReturn(servletEnvironment);
     }

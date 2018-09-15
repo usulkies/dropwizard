@@ -7,9 +7,9 @@ import io.dropwizard.servlets.tasks.PostBodyTask;
 import io.dropwizard.servlets.tasks.Task;
 import io.dropwizard.setup.Environment;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,12 +29,12 @@ public class DropwizardTestSupportTest {
     public static final DropwizardTestSupport<TestConfiguration> TEST_SUPPORT =
             new DropwizardTestSupport<>(TestApplication.class, resourceFilePath("test-config.yaml"));
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         TEST_SUPPORT.before();
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDown() {
         TEST_SUPPORT.after();
     }

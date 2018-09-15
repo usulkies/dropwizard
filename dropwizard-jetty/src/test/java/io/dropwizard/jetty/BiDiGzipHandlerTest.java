@@ -5,9 +5,9 @@ import io.dropwizard.util.Resources;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.http.HttpTester;
 import org.eclipse.jetty.servlet.ServletTester;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +33,7 @@ public class BiDiGzipHandlerTest {
     private final ServletTester servletTester = new ServletTester();
     private final HttpTester.Request request = HttpTester.newRequest();
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         request.setHeader(HttpHeader.HOST.asString(), "localhost");
         request.setHeader("Connection", "close");
@@ -47,7 +47,7 @@ public class BiDiGzipHandlerTest {
         servletTester.start();
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         servletTester.stop();
     }

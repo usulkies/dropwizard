@@ -2,8 +2,8 @@ package io.dropwizard.auth;
 
 import com.codahale.metrics.MetricRegistry;
 import com.github.benmanes.caffeine.cache.CaffeineSpec;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
 import java.security.Principal;
@@ -25,7 +25,7 @@ public class CachingAuthenticatorTest {
     private final CachingAuthenticator<String, Principal> cached =
         new CachingAuthenticator<>(new MetricRegistry(), underlying, CaffeineSpec.parse("maximumSize=1"));
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(underlying.authenticate(anyString())).thenReturn(Optional.of(new PrincipalImpl("principal")));
     }

@@ -19,9 +19,9 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.text.StringSubstitutor;
 import org.assertj.core.api.Condition;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +76,7 @@ public class ThrottlingAppenderWrapperTest {
             "dw");
     }
 
-    @Before
+    @BeforeEach
     public void setup() throws UnsupportedEncodingException {
         this.oldSysOut = System.out;
         // This forces auto-flush, which should help with buffering issues
@@ -84,7 +84,7 @@ public class ThrottlingAppenderWrapperTest {
         System.setOut(this.newSysOut);
     }
 
-    @After
+    @AfterEach
     public void teardown() {
         if (this.oldSysOut != null) {
             System.setOut(this.oldSysOut);

@@ -21,10 +21,8 @@ import io.dropwizard.validation.BaseValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 import org.assertj.core.data.MapEntry;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
@@ -42,10 +40,7 @@ public class DefaultLoggingFactoryTest {
 
     private DefaultLoggingFactory config;
 
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         objectMapper.getSubtypeResolver().registerSubtypes(ConsoleAppenderFactory.class,
                 FileAppenderFactory.class,
@@ -93,9 +88,9 @@ public class DefaultLoggingFactoryTest {
 
     @Test
     public void testConfigure() throws Exception {
-        final File newAppLog = folder.newFile("example-new-app.log");
-        final File newAppNotAdditiveLog = folder.newFile("example-new-app-not-additive.log");
-        final File defaultLog = folder.newFile("example.log");
+        final File newAppLog = Files.createTempFile("example-new-app",".log").toFile();
+        final File newAppNotAdditiveLog = Files.createTempFile("example-new-app-not-additive", ".log").toFile();
+        final File defaultLog = Files.createTempFile("example", ".log").toFile();
         final StringSubstitutor substitutor = new StringSubstitutor(Maps.of(
                 "new_app", StringUtils.removeEnd(newAppLog.getAbsolutePath(), ".log"),
                 "new_app_not_additive", StringUtils.removeEnd(newAppNotAdditiveLog.getAbsolutePath(), ".log"),

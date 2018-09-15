@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.jackson.Jackson;
 import io.dropwizard.validation.Validated;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nullable;
 import javax.validation.Valid;
@@ -106,7 +106,7 @@ public class JacksonMessageBodyProviderTest {
     private final JacksonMessageBodyProvider provider =
             new JacksonMessageBodyProvider(mapper);
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         assumeThat(Locale.getDefault().getLanguage()).isEqualTo("en");
     }
