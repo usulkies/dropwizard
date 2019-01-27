@@ -9,17 +9,17 @@ import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.jersey.params.LongParam;
 import io.dropwizard.jersey.params.NonEmptyStringParam;
 import io.dropwizard.validation.Validated;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.valuehandling.UnwrapValidatedValue;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.valueextraction.Unwrapping;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
@@ -78,25 +78,24 @@ public class ValidatingResource {
 
     @GET
     @Path("paramValidation")
-    public String paramValidation(@UnwrapValidatedValue @NotNull @Min(2) @Max(5) @QueryParam("length") LongParam length) {
-        return Long.toString(length.get());
+    public Long paramValidation(@NotNull @Min(2) @Max(5) @QueryParam("length") LongParam length) {
+        return length.get();
     }
 
     @GET
     @Path("messageValidation")
     public String messageValidation(
-        @UnwrapValidatedValue
-        @NotNull
-        @Min(value = 2, message = "The value ${validatedValue} is less then {value}")
-        @QueryParam("length")
-            LongParam length
+            @NotNull(payload = Unwrapping.Unwrap.class)
+            @Min(value = 2, message = "The value ${validatedValue} is less then {value}", payload = Unwrapping.Unwrap.class)
+            @QueryParam("length")
+                    LongParam length
     ) {
         return Long.toString(length.get());
     }
 
     @GET
     @Path("barter")
-    public String isnt(@QueryParam("name") @Length(min = 3) @UnwrapValidatedValue NonEmptyStringParam name) {
+    public String isnt(@QueryParam("name") @Length(min = 3, payload = Unwrapping.Unwrap.class) NonEmptyStringParam name) {
         return name.get().orElse(null);
     }
 
@@ -106,7 +105,7 @@ public class ValidatingResource {
             @NotNull
             @Valid
             @Validated({Partial1.class, Partial2.class})
-            PartialExample obj
+                    PartialExample obj
     ) {
         return obj;
     }
@@ -153,7 +152,7 @@ public class ValidatingResource {
             @NotNull(groups = Partial1.class)
             @Valid
             @Validated({Partial1.class})
-            PartialExample obj
+                    PartialExample obj
     ) {
         return obj;
     }
@@ -191,8 +190,8 @@ public class ValidatingResource {
     @POST
     @Path("sub-valid-group-zoo")
     public String subValidGroupBlazer(
-        @Valid @Validated(Partial1.class) @BeanParam SubBeanParameter params,
-        @Valid @Validated(Partial1.class) ValidRepresentation entity) {
+            @Valid @Validated(Partial1.class) @BeanParam SubBeanParameter params,
+            @Valid @Validated(Partial1.class) ValidRepresentation entity) {
         return params.getName() + " " + params.getAddress() + " " + entity.getName();
     }
 
@@ -210,7 +209,7 @@ public class ValidatingResource {
 
     @GET
     @Path("headCopy")
-    public String heads(@QueryParam("cheese") @NotNull @UnwrapValidatedValue(false) IntParam secretSauce) {
+    public String heads(@QueryParam("cheese") @NotNull IntParam secretSauce) {
         return secretSauce.get().toString();
     }
 

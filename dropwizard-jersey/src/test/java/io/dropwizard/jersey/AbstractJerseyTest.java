@@ -12,7 +12,7 @@ import org.glassfish.jersey.test.TestProperties;
 public abstract class AbstractJerseyTest extends JerseyTest {
 
     private static final int DEFAULT_CONNECT_TIMEOUT_MS = 1000;
-    private static final int DEFAULT_READ_TIMEOUT_MS = 5000;
+    private static final int DEFAULT_READ_TIMEOUT_MS = 500000;
 
     static {
         BootstrapLogging.bootstrap();
